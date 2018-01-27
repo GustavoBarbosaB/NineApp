@@ -1,14 +1,20 @@
-package com.example.gustavobarbosab.ninemessage.chat;
+package com.example.gustavobarbosab.ninemessage.domain;
+
 
 /**
  * Created by gustavobarbosab on 26/01/18.
  */
-
-public class MessageImpl implements com.example.gustavobarbosab.ninemessage.chat.Message {
+public class MessageImpl implements Message {
 
     private String message;
     private String sender;
     private String receiver;
+
+    public MessageImpl(String message, String sender, String receiver) {
+        this.message = message;
+        this.sender = sender;
+        this.receiver = receiver;
+    }
 
     @Override
     public String getMessage() {

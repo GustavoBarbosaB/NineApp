@@ -1,4 +1,4 @@
-package com.example.gustavobarbosab.ninemessage.chat;
+package com.example.gustavobarbosab.ninemessage.domain;
 
 /**
  * Created by gustavobarbosab on 26/01/18.

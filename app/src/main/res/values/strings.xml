@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Nine Message</string>
+    <string name="hint_chat">Digite uma mensagem</string>
 </resources>
