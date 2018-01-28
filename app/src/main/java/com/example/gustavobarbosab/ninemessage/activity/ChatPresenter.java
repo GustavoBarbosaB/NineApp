@@ -10,14 +10,14 @@ import java.util.List;
  * Created by gustavobarbosab on 26/01/18.
  */
 
-public interface ChatPresenter extends Serializable {
+public interface ChatPresenter  {
     void onDestroy();
 
     void onStop();
-
+    ChatActivity getChatActivity();
     void sendMessage();
     void receiveMessage();
-    void setMessages(List<Message> messages);
     List<Message> getMessages();
     void injectChatApplication();
+    void checkPermission();
 }

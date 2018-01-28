@@ -1,6 +1,7 @@
 package com.example.gustavobarbosab.ninemessage.service;
 
 import com.example.gustavobarbosab.ninemessage.domain.Message;
+import com.example.gustavobarbosab.ninemessage.domain.MessageImpl;
 
 import java.util.List;
 
@@ -12,6 +13,6 @@ import retrofit2.http.GET;
  */
 
 public interface ChatService {
-    @GET("5a6cbfa52f0000e91bb6e514")
-    Call<List<Message>> receiveMessage();
+    @GET("5a6cf2ea2f00003322b6e537")
+    Call<MessageImpl> receiveMessage();
 }

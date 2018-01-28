@@ -1,6 +1,9 @@
 package com.example.gustavobarbosab.ninemessage.activity;
 
+import android.Manifest;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.PermissionChecker;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -46,6 +49,8 @@ public class ChatActivity extends AppCompatActivity implements ChatView {
         setContentView(R.layout.activity_main);
         testBundle(savedInstanceState);
         configureRecycler();
+        checkPermission();
+
         //Aqui chamaria ainda o método de ouvir as mensagens
     }
 
@@ -60,7 +65,7 @@ public class ChatActivity extends AppCompatActivity implements ChatView {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putSerializable("chatPresenter", chatPresenter);
+        outState.putSerializable("chatPresenter", (ChatPresenterImpl) chatPresenter);
     }
 
     @Override
@@ -91,6 +96,11 @@ public class ChatActivity extends AppCompatActivity implements ChatView {
     @Override
     public void refreshAdapter() {
         mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void checkPermission() {
+        chatPresenter.checkPermission();
     }
 
 

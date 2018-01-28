@@ -1,7 +1,10 @@
 package com.example.gustavobarbosab.ninemessage.callback;
 
+import android.widget.Toast;
+
 import com.example.gustavobarbosab.ninemessage.activity.ChatPresenter;
 import com.example.gustavobarbosab.ninemessage.domain.Message;
+import com.example.gustavobarbosab.ninemessage.domain.MessageImpl;
 import com.example.gustavobarbosab.ninemessage.event.MessageEvent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -16,7 +19,7 @@ import retrofit2.Response;
  * Created by gustavobarbosab on 27/01/18.
  */
 
-public class ReceiveMessage implements Callback<List<Message>> {
+public class ReceiveMessage implements Callback<MessageImpl> {
 
     private ChatPresenter chatPresenter;
     private EventBus eventBus;
@@ -27,18 +30,17 @@ public class ReceiveMessage implements Callback<List<Message>> {
     }
 
     @Override
-    public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
+    public void onResponse(Call<MessageImpl> call, Response<MessageImpl> response) {
         if(response.isSuccessful()){
-            List<Message> messages = response.body();
-            eventBus.post(new MessageEvent(messages));
-
+            MessageImpl message = response.body();
+            eventBus.post(new MessageEvent(message));
         }
 
     }
 
     @Override
-    public void onFailure(Call<List<Message>> call, Throwable t) {
-
+    public void onFailure(Call<MessageImpl> call, Throwable t) {
+        Toast.makeText(chatPresenter.getChatActivity(),"Requisição falhou!",Toast.LENGTH_SHORT).show();
     }
 
 }

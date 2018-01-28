@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.ChatActivity">
+    tools:context=".activity.ChatActivity"
+    android:background="#DCDCDC">
 
 
     <android.support.v7.widget.RecyclerView
@@ -20,7 +21,7 @@
         android:id="@+id/textMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="15dp"
         android:layout_marginEnd="0dp"
         android:ems="13"
         android:hint="@string/hint_chat"
@@ -28,7 +29,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/sendButton"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginRight="0dp" />
+        android:layout_marginRight="0dp"
+        android:background="#FFFFFF"
+        android:padding="5dp"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/sendButton"

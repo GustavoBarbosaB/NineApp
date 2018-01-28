@@ -15,4 +15,5 @@ public interface ChatView {
     //Aqui fiz o método inverso, na verdade estamos ouvindo a mensagem
     void sendMessage();
     void refreshAdapter();
+    void checkPermission();
 }

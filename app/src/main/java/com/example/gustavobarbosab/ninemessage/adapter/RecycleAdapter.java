@@ -40,7 +40,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
         holder.textView.setText(messages.get(position).getMessage());
         Context context = holder.imageView.getContext();
         Picasso.with(context)
-                .load("https://api.adorable.io/avatars/285/:gustavo.png")
+                .load("https://api.adorable.io/avatars/285/:gustavo"+position+".png")
                 .into(holder.imageView);
     }
 
