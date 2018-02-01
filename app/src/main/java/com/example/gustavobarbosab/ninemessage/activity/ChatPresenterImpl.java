@@ -6,16 +6,15 @@ import android.support.v4.content.PermissionChecker;
 import android.widget.Toast;
 
 import com.example.gustavobarbosab.ninemessage.application.ChatApplication;
-import com.example.gustavobarbosab.ninemessage.callback.ReceiveMessage;
 import com.example.gustavobarbosab.ninemessage.component.ChatComponent;
 import com.example.gustavobarbosab.ninemessage.domain.Message;
-import com.example.gustavobarbosab.ninemessage.domain.MessageImpl;
+import com.example.gustavobarbosab.ninemessage.event.ErrorEvent;
 import com.example.gustavobarbosab.ninemessage.event.MessageEvent;
 import com.example.gustavobarbosab.ninemessage.service.ChatService;
+import com.example.gustavobarbosab.ninemessage.service.MessageService;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -24,13 +23,14 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
-import retrofit2.Call;
+import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * Created by gustavobarbosab on 26/01/18.
  */
 
 public class ChatPresenterImpl implements ChatPresenter, Serializable {
+
 
     @Override
     public ChatActivity getChatActivity() {
@@ -42,24 +42,26 @@ public class ChatPresenterImpl implements ChatPresenter, Serializable {
     private List<Message> messages = new ArrayList<>();
 
     @Inject
-    ChatService chatService;
-
-    @Inject
     EventBus eventBus;
 
+    @Inject
+    ChatService chatService;
+
     private ChatComponent component;
+
+    private CompositeDisposable compositeDisposable;
+
+    private MessageService messageService;
 
 
     public ChatPresenterImpl(ChatActivity chatActivity) {
         this.chatActivity = chatActivity;
         injectChatApplication();
-        eventBus = chatActivity.eventBus;
-        chatService = chatActivity.chatService;
-        ButterKnife.bind(chatActivity);
+        compositeDisposable = new CompositeDisposable();
+        messageService = new MessageService(chatService,compositeDisposable,eventBus);
         eventBus.register(this);
-
-
     }
+
 
     @Override
     public void onDestroy() {
@@ -69,9 +71,8 @@ public class ChatPresenterImpl implements ChatPresenter, Serializable {
     @Override
     public void onStop(){
         eventBus.unregister(this);
+        compositeDisposable.clear();
     }
-
-
 
     @Override
     public void sendMessage() {
@@ -81,15 +82,20 @@ public class ChatPresenterImpl implements ChatPresenter, Serializable {
 
     @Override
     public void receiveMessage() {
-
-        Call<MessageImpl> call = chatService.receiveMessage();
-        call.enqueue(new ReceiveMessage(this,eventBus));
+        messageService.getMessage();
     }
 
+    @Override
     @Subscribe
     public void onEvent(MessageEvent messageEvent){
         this.messages.add(messageEvent.getMessage());
         chatActivity.refreshAdapter();
+    }
+
+    @Override
+    @Subscribe
+    public void onError(ErrorEvent error){
+        Toast.makeText(chatActivity,error.getError(),Toast.LENGTH_SHORT).show();
     }
 
     public List<Message> getMessages() {
@@ -100,7 +106,6 @@ public class ChatPresenterImpl implements ChatPresenter, Serializable {
     public void injectChatApplication() {
         ChatApplication app = (ChatApplication) chatActivity.getApplication();
         component = app.getComponent();
-        component.inject(chatActivity);
         component.inject(this);
     }
 

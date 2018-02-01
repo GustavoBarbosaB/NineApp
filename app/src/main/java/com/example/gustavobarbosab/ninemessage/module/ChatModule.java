@@ -10,6 +10,7 @@ import dagger.Module;
 import dagger.Provides;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 /**
  * Created by gustavobarbosab on 27/01/18.
@@ -30,6 +31,7 @@ public class ChatModule {
     public ChatService getChatService(){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://www.mocky.io/v2/")
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

@@ -1,5 +1,7 @@
 package com.example.gustavobarbosab.ninemessage.service;
 
+import android.database.Observable;
+
 import com.example.gustavobarbosab.ninemessage.domain.Message;
 import com.example.gustavobarbosab.ninemessage.domain.MessageImpl;
 
@@ -14,5 +16,5 @@ import retrofit2.http.GET;
 
 public interface ChatService {
     @GET("5a6cf2ea2f00003322b6e537")
-    Call<MessageImpl> receiveMessage();
+    io.reactivex.Observable<MessageImpl> receiveMessage();
 }

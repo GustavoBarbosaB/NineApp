@@ -2,7 +2,9 @@ package com.example.gustavobarbosab.ninemessage.component;
 
 import com.example.gustavobarbosab.ninemessage.activity.ChatPresenter;
 import com.example.gustavobarbosab.ninemessage.activity.ChatActivity;
+import com.example.gustavobarbosab.ninemessage.activity.ChatPresenterImpl;
 import com.example.gustavobarbosab.ninemessage.module.ChatModule;
+import com.example.gustavobarbosab.ninemessage.service.MessageService;
 
 import dagger.Component;
 
@@ -15,6 +17,6 @@ public interface ChatComponent {
     /**
      * Aqui nós informamos quais classes irão precisar da injeção de dependencias
      */
-    void inject(ChatPresenter chatPresenter);
+    void inject(ChatPresenterImpl chatPresenterImpl);
     void inject(ChatActivity chatActivity);
 }

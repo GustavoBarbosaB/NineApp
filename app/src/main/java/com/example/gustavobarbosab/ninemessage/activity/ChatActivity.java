@@ -1,25 +1,15 @@
 package com.example.gustavobarbosab.ninemessage.activity;
 
-import android.Manifest;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.PermissionChecker;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
 import com.example.gustavobarbosab.ninemessage.R;
 import com.example.gustavobarbosab.ninemessage.adapter.RecycleAdapter;
-import com.example.gustavobarbosab.ninemessage.event.MessageEvent;
-import com.example.gustavobarbosab.ninemessage.service.ChatService;
-
-import org.greenrobot.eventbus.EventBus;
-
-import java.util.ArrayList;
-
-import javax.inject.Inject;
+import com.example.gustavobarbosab.ninemessage.application.ChatApplication;
+import com.example.gustavobarbosab.ninemessage.component.ChatComponent;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,24 +23,24 @@ public class ChatActivity extends AppCompatActivity implements ChatView {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
-    @Inject
-    ChatService chatService;
-
-    @Inject
-    EventBus eventBus;
-
     private RecycleAdapter mAdapter;
 
     private ChatPresenter chatPresenter;
+
+    private ChatComponent component;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+        ChatApplication app = (ChatApplication) getApplication();
+        component = app.getComponent();
+        component.inject(this);
         testBundle(savedInstanceState);
         configureRecycler();
         checkPermission();
-
         //Aqui chamaria ainda o método de ouvir as mensagens
     }
 
@@ -70,10 +60,11 @@ public class ChatActivity extends AppCompatActivity implements ChatView {
 
     @Override
     public void testBundle(Bundle savedInstanceState) {
-        if(savedInstanceState!=null)
+        if(savedInstanceState!=null) {
             chatPresenter = (ChatPresenter) savedInstanceState.getSerializable("chatPresenter");
-        else
+        }else {
             chatPresenter = new ChatPresenterImpl(this);
+        }
     }
 
     @Override
@@ -90,7 +81,7 @@ public class ChatActivity extends AppCompatActivity implements ChatView {
     @Override
     public void sendMessage() {
         chatPresenter.receiveMessage();
-        Toast.makeText(getApplicationContext(),"Botão pressionado!",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(),"Botão pressionado!",Toast.LENGTH_SHORT).show();
     }
 
     @Override

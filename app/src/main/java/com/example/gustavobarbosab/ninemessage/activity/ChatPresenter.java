@@ -1,6 +1,7 @@
 package com.example.gustavobarbosab.ninemessage.activity;
 
 import com.example.gustavobarbosab.ninemessage.domain.Message;
+import com.example.gustavobarbosab.ninemessage.event.ErrorEvent;
 import com.example.gustavobarbosab.ninemessage.event.MessageEvent;
 
 import java.io.Serializable;
@@ -12,7 +13,6 @@ import java.util.List;
 
 public interface ChatPresenter  {
     void onDestroy();
-
     void onStop();
     ChatActivity getChatActivity();
     void sendMessage();
@@ -20,4 +20,6 @@ public interface ChatPresenter  {
     List<Message> getMessages();
     void injectChatApplication();
     void checkPermission();
+    void onError(ErrorEvent error);
+    void onEvent(MessageEvent messageEvent);
 }
