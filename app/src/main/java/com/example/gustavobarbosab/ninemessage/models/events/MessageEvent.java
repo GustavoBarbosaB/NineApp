@@ -1,9 +1,6 @@
-package com.example.gustavobarbosab.ninemessage.event;
+package com.example.gustavobarbosab.ninemessage.models.events;
 
-import com.example.gustavobarbosab.ninemessage.domain.Message;
-import com.example.gustavobarbosab.ninemessage.domain.MessageImpl;
-
-import java.util.List;
+import com.example.gustavobarbosab.ninemessage.models.Message;
 
 /**
  * Created by gustavobarbosab on 27/01/18.
@@ -20,7 +17,7 @@ public class MessageEvent {
     public MessageEvent() {
     }
 
-    public MessageEvent(MessageImpl message) {
+    public MessageEvent(Message message) {
 
         this.message = message;
     }

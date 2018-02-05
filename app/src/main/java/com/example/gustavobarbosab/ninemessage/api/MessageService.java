@@ -1,17 +1,13 @@
-package com.example.gustavobarbosab.ninemessage.service;
+package com.example.gustavobarbosab.ninemessage.api;
 
-import android.util.EventLog;
-
-import com.example.gustavobarbosab.ninemessage.domain.MessageImpl;
-import com.example.gustavobarbosab.ninemessage.event.ErrorEvent;
-import com.example.gustavobarbosab.ninemessage.event.MessageEvent;
+import com.example.gustavobarbosab.ninemessage.screens.chat.core.ChatPresenter;
+import com.example.gustavobarbosab.ninemessage.models.Message;
+import com.example.gustavobarbosab.ninemessage.models.events.ErrorEvent;
+import com.example.gustavobarbosab.ninemessage.models.events.MessageEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
-import javax.inject.Inject;
-
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -19,10 +15,9 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class MessageService {
-
-
+/*
     private ChatService chatService;
-    private CompositeDisposable mCompositeDisposable;
+    private ChatPresenter chatPresenter;
     private EventBus eventBus;
 
     public ChatService getChatService() {
@@ -33,32 +28,29 @@ public class MessageService {
         this.chatService = chatService;
     }
 
-    public MessageService(ChatService chatService, CompositeDisposable mCompositeDisposable, EventBus eventBus) {
+    public MessageService(ChatService chatService, ChatPresenter chatPresenter, EventBus eventBus) {
         this.chatService = chatService;
-        this.mCompositeDisposable = mCompositeDisposable;
+        this.chatPresenter = chatPresenter;
         this.eventBus = eventBus;
     }
 
-    public void setmCompositeDisposable(CompositeDisposable mCompositeDisposable) {
-        this.mCompositeDisposable = mCompositeDisposable;
-    }
 
     public void setEventBus(EventBus eventBus) {
         this.eventBus = eventBus;
     }
 
     public void getMessage(){
-        mCompositeDisposable.add(chatService.receiveMessage()
+        chatPresenter.addDisposable(chatService.receiveMessage()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse,this::handleError));
     }
 
-    private void handleResponse(MessageImpl message) {
+    private void handleResponse(Message message) {
         eventBus.post(new MessageEvent(message));
     }
 
     private void handleError(Throwable error) {
         eventBus.post(new ErrorEvent(error.getLocalizedMessage()));
-    }
+    }*/
 }
