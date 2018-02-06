@@ -1,6 +1,6 @@
 package com.example.gustavobarbosab.ninemessage.api;
 
-import com.example.gustavobarbosab.ninemessage.models.Message;
+import com.example.gustavobarbosab.ninemessage.domain.Message;
 
 import retrofit2.http.GET;
 

@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.gustavobarbosab.ninemessage.R;
-import com.example.gustavobarbosab.ninemessage.models.Message;
+import com.example.gustavobarbosab.ninemessage.domain.Message;
 import com.example.gustavobarbosab.ninemessage.util.CircleTransform;
 import com.squareup.picasso.Picasso;
 

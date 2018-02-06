@@ -50,7 +50,7 @@
             android:elevation="1dp"
             app:elevation="1dp"
             android:layout_weight="1"
-            android:src="@drawable/ic_send_white" />
+            android:src="@drawable/ic_send" />
 
     </LinearLayout>
 

@@ -1,11 +1,11 @@
-package com.example.gustavobarbosab.ninemessage.screens.chat.core;
+package com.example.gustavobarbosab.ninemessage.screens.chat.mvp;
 
 import android.util.Log;
 
 import com.example.gustavobarbosab.ninemessage.R;
-import com.example.gustavobarbosab.ninemessage.models.*;
-import com.example.gustavobarbosab.ninemessage.models.events.ErrorEvent;
-import com.example.gustavobarbosab.ninemessage.models.events.MessageEvent;
+import com.example.gustavobarbosab.ninemessage.domain.*;
+import com.example.gustavobarbosab.ninemessage.domain.events.ErrorEvent;
+import com.example.gustavobarbosab.ninemessage.domain.events.MessageEvent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -35,7 +35,7 @@ public class ChatPresenter{
         this.compositeDisposable = compositeDisposable;
         view.setmAdapter(messages);
         eventBus.register(this);
-        ButterKnife.bind(this,view.view);
+        ButterKnife.bind(this,view.view());
     }
 
     public void onCreate() {
@@ -58,11 +58,10 @@ public class ChatPresenter{
         view.toastMessage(error.getError());
     }
 
-
     @OnClick(R.id.sendButton)
-    public void sendMessage(){
-        this.messages.add(model.fakeMessage(view.getMessageText()));
+    void sendMessage(){
+        messages.add(model.fakeMessage(view.getMessageText()));
         view.notifyDataChanged();
-        view.clearText(view.textView);
     }
+
 }

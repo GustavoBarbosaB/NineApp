@@ -1,4 +1,4 @@
-package com.example.gustavobarbosab.ninemessage.models.events;
+package com.example.gustavobarbosab.ninemessage.domain.events;
 
 /**
  * Created by gustavobarbosab on 31/01/18.

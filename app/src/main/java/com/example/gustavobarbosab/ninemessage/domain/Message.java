@@ -1,4 +1,4 @@
-package com.example.gustavobarbosab.ninemessage.models;
+package com.example.gustavobarbosab.ninemessage.domain;
 
 
 /**

@@ -1,10 +1,8 @@
-package com.example.gustavobarbosab.ninemessage.screens.chat.core;
+package com.example.gustavobarbosab.ninemessage.screens.chat.mvp;
 
 import com.example.gustavobarbosab.ninemessage.api.ChatService;
-import com.example.gustavobarbosab.ninemessage.models.Message;
+import com.example.gustavobarbosab.ninemessage.domain.Message;
 import com.example.gustavobarbosab.ninemessage.screens.chat.ChatActivity;
-
-import java.util.List;
 
 import io.reactivex.Observable;
 

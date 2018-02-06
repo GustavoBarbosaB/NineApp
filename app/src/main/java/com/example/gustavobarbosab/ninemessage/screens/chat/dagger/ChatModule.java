@@ -2,9 +2,9 @@ package com.example.gustavobarbosab.ninemessage.screens.chat.dagger;
 
 import com.example.gustavobarbosab.ninemessage.api.ChatService;
 import com.example.gustavobarbosab.ninemessage.screens.chat.ChatActivity;
-import com.example.gustavobarbosab.ninemessage.screens.chat.core.ChatModel;
-import com.example.gustavobarbosab.ninemessage.screens.chat.core.ChatPresenter;
-import com.example.gustavobarbosab.ninemessage.screens.chat.core.ChatView;
+import com.example.gustavobarbosab.ninemessage.screens.chat.mvp.ChatModel;
+import com.example.gustavobarbosab.ninemessage.screens.chat.mvp.ChatPresenter;
+import com.example.gustavobarbosab.ninemessage.screens.chat.mvp.ChatView;
 
 import org.greenrobot.eventbus.EventBus;
 

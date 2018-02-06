@@ -1,6 +1,6 @@
-package com.example.gustavobarbosab.ninemessage.models.events;
+package com.example.gustavobarbosab.ninemessage.domain.events;
 
-import com.example.gustavobarbosab.ninemessage.models.Message;
+import com.example.gustavobarbosab.ninemessage.domain.Message;
 
 /**
  * Created by gustavobarbosab on 27/01/18.

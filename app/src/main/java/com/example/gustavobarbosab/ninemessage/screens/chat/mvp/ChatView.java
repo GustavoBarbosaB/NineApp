@@ -1,4 +1,4 @@
-package com.example.gustavobarbosab.ninemessage.screens.chat.core;
+package com.example.gustavobarbosab.ninemessage.screens.chat.mvp;
 
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gustavobarbosab.ninemessage.R;
-import com.example.gustavobarbosab.ninemessage.models.Message;
+import com.example.gustavobarbosab.ninemessage.domain.Message;
 import com.example.gustavobarbosab.ninemessage.screens.chat.ChatActivity;
 import com.example.gustavobarbosab.ninemessage.screens.chat.recycler.ChatAdapter;
 
@@ -19,7 +19,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by gustavobarbosab on 05/02/18.
@@ -67,6 +66,7 @@ public class ChatView {
     public void notifyDataChanged() {
         recyclerView.smoothScrollToPosition(mAdapter.getItemCount()-1);
         mAdapter.notifyDataSetChanged();
+        this.clearText(textView);
     }
 
     public void toastMessage(String message) {
