@@ -5,6 +5,8 @@ import com.example.gustavobarbosab.ninemessage.util.rx.RxSchedulers;
 
 import org.greenrobot.eventbus.EventBus;
 
+import javax.inject.Singleton;
+
 import dagger.Component;
 
 /**
@@ -20,7 +22,6 @@ import dagger.Component;
     }
 )
 public interface AppComponent {
-
     EventBus eventBus();
     RxSchedulers rxSchedulers();
     ChatService apiService();

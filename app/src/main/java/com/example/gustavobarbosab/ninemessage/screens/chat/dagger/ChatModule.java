@@ -5,6 +5,7 @@ import com.example.gustavobarbosab.ninemessage.screens.chat.ChatActivity;
 import com.example.gustavobarbosab.ninemessage.screens.chat.mvp.ChatModel;
 import com.example.gustavobarbosab.ninemessage.screens.chat.mvp.ChatPresenter;
 import com.example.gustavobarbosab.ninemessage.screens.chat.mvp.ChatView;
+import com.example.gustavobarbosab.ninemessage.util.rx.RxSchedulers;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -32,9 +33,9 @@ public class ChatModule {
 
     @ChatScope
     @Provides
-    ChatPresenter providePresenter(ChatView chatView,ChatModel chatModel,EventBus eventBus){
+    ChatPresenter providePresenter(ChatView chatView, ChatModel chatModel, EventBus eventBus, RxSchedulers rxSchedulers){
         CompositeDisposable compositeDisposable = new CompositeDisposable();
-        return new ChatPresenter(chatView,chatModel,compositeDisposable,eventBus);
+        return new ChatPresenter(chatView,chatModel,compositeDisposable,eventBus,rxSchedulers);
     }
 
     @ChatScope

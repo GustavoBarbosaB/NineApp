@@ -4,6 +4,8 @@ import android.util.EventLog;
 
 import org.greenrobot.eventbus.EventBus;
 
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 

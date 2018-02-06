@@ -19,12 +19,19 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by gustavobarbosab on 05/02/18.
  */
 
-public class ChatView {
+public class ChatView implements ChatContract.View{
+
+    /**
+     * View (Visualização): Activitys, Fragments, Dialogs, Widgets e Adapters;
+     *como no MVC, responde a saída e entrada de dados, porém a saída vem do Presenter,
+     *a entrada normalmente vem do usuário;
+     */
 
     @BindView(R.id.sendButton)
     FloatingActionButton sendButton;
@@ -39,8 +46,10 @@ public class ChatView {
 
     private ChatAdapter mAdapter;
 
-    public ChatView(ChatActivity context) {
+    private ChatActivity activity;
 
+    public ChatView(ChatActivity context) {
+        this.activity=context;
         FrameLayout parent = new FrameLayout(context);
         parent.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         view = LayoutInflater.from(context).inflate(R.layout.activity_main, parent, true);
@@ -58,10 +67,6 @@ public class ChatView {
         return view;
     }
 
-    /*public void swapAdapter(List<Message> messages)
-    {
-        mAdapter.swapAdapter(messages);
-    }*/
 
     public void notifyDataChanged() {
         recyclerView.smoothScrollToPosition(mAdapter.getItemCount()-1);
@@ -73,7 +78,11 @@ public class ChatView {
         Toast.makeText(view.getContext(),message,Toast.LENGTH_SHORT).show();
     }
 
-
+    @OnClick(R.id.sendButton)
+    @Override
+    public void sendMessage(){
+        activity.getPresenter().getMessage();
+    }
 
     public void clearText(TextView text){
         text.setText("");
