@@ -2,6 +2,7 @@ package com.example.gustavobarbosab.ninemessage.screens.chat.core;
 
 import android.util.Log;
 
+import com.example.gustavobarbosab.ninemessage.R;
 import com.example.gustavobarbosab.ninemessage.models.*;
 import com.example.gustavobarbosab.ninemessage.models.events.ErrorEvent;
 import com.example.gustavobarbosab.ninemessage.models.events.MessageEvent;
@@ -12,6 +13,8 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
@@ -30,7 +33,9 @@ public class ChatPresenter{
         this.model = model;
         this.eventBus = eventBus;
         this.compositeDisposable = compositeDisposable;
+        view.setmAdapter(messages);
         eventBus.register(this);
+        ButterKnife.bind(this,view.view);
     }
 
     public void onCreate() {
@@ -53,4 +58,11 @@ public class ChatPresenter{
         view.toastMessage(error.getError());
     }
 
+
+    @OnClick(R.id.sendButton)
+    public void sendMessage(){
+        this.messages.add(model.fakeMessage(view.getMessageText()));
+        view.notifyDataChanged();
+        view.clearText(view.textView);
+    }
 }

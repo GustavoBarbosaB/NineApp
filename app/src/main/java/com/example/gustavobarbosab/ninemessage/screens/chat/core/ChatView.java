@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gustavobarbosab.ninemessage.R;
@@ -18,6 +19,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by gustavobarbosab on 05/02/18.
@@ -31,6 +33,9 @@ public class ChatView {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
+    @BindView(R.id.textMessage)
+    TextView textView;
+
     View view;
 
     private ChatAdapter mAdapter;
@@ -41,28 +46,40 @@ public class ChatView {
         parent.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         view = LayoutInflater.from(context).inflate(R.layout.activity_main, parent, true);
         ButterKnife.bind(this,view);
+    }
 
-        mAdapter = new ChatAdapter();
+    public void setmAdapter(List<Message> messages) {
+        mAdapter = new ChatAdapter(messages);
         recyclerView.setAdapter(mAdapter);
-        RecyclerView.LayoutManager mLayout=new LinearLayoutManager(context);
+        LinearLayoutManager mLayout= new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(mLayout);
-
     }
 
     public View view() {
         return view;
     }
 
-    public void swapAdapter(List<Message> messages)
+    /*public void swapAdapter(List<Message> messages)
     {
         mAdapter.swapAdapter(messages);
-    }
+    }*/
 
     public void notifyDataChanged() {
+        recyclerView.smoothScrollToPosition(mAdapter.getItemCount()-1);
         mAdapter.notifyDataSetChanged();
     }
 
     public void toastMessage(String message) {
         Toast.makeText(view.getContext(),message,Toast.LENGTH_SHORT).show();
+    }
+
+
+
+    public void clearText(TextView text){
+        text.setText("");
+    }
+
+    public String getMessageText() {
+        return textView.getText().toString();
     }
 }

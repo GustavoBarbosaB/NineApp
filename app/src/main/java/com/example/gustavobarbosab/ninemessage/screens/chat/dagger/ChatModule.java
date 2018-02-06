@@ -17,6 +17,7 @@ import io.reactivex.disposables.CompositeDisposable;
  */
 @Module
 public class ChatModule {
+
     ChatActivity chatActivity;
 
     public ChatModule(ChatActivity context){
@@ -44,13 +45,9 @@ public class ChatModule {
 
     @ChatScope
     @Provides
-    public EventBus getEventBus() {
-        return EventBus.builder().build();
-    }
-
-    @ChatScope
-    @Provides
     ChatModel provideModel(ChatService api){
         return new ChatModel(chatActivity,api);
     }
+
+
 }

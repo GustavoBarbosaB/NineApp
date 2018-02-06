@@ -26,15 +26,11 @@ import static android.view.View.VISIBLE;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> implements Serializable {
 
-    private List<Message> messages = new ArrayList<>();
+    private List<Message> messages;
 
-
-    public void swapAdapter(List<Message> messages) {
-        this.messages.clear();
-        this.messages.addAll(messages);
-        this.notifyDataSetChanged();
+    public ChatAdapter(List<Message> messages) {
+        this.messages = messages;
     }
-
 
     @Override
     public ChatAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -47,7 +43,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> im
     @Override
     public void onBindViewHolder(ChatAdapter.ViewHolder holder, int position) {
         Context context;
-        if(position%2==0){
+        /*if(position%2==0){*/
             holder.textView.setVisibility(VISIBLE);
             holder.imageView.setVisibility(VISIBLE);
             holder.cardView.setVisibility(VISIBLE);
@@ -57,7 +53,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> im
                     .load("https://api.adorable.io/avatars/285/:gustavo"+position+".png")
                     .transform(new CircleTransform())
                     .into(holder.imageView);
-        }else{
+        /*}else{
             holder.textSender.setVisibility(VISIBLE);
             holder.imageSender.setVisibility(VISIBLE);
             holder.carSender.setVisibility(VISIBLE);
@@ -67,7 +63,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> im
                     .load("https://api.adorable.io/avatars/285/:gustavo"+position+".png")
                     .transform(new CircleTransform())
                     .into(holder.imageSender);
-        }
+        }*/
     }
 
     @Override

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".screens.chat.ChatActivity"
-    android:background="#DCDCDC">
+    android:background="#e7e0d9">
 
 
     <android.support.v7.widget.RecyclerView
@@ -36,7 +36,7 @@
             android:ems="13"
             android:hint="@string/hint_chat"
             android:inputType="textPersonName"
-            android:padding="10dp"
+            android:padding="13dp"
             android:layout_margin="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/sendButton"
@@ -47,9 +47,10 @@
             android:id="@+id/sendButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:elevation="1dp"
+            app:elevation="1dp"
             android:layout_weight="1"
-            android:src="@android:drawable/ic_menu_send" />
-
+            android:src="@drawable/ic_send_white" />
 
     </LinearLayout>
 

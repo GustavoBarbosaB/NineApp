@@ -4,6 +4,8 @@ import com.example.gustavobarbosab.ninemessage.api.ChatService;
 import com.example.gustavobarbosab.ninemessage.models.Message;
 import com.example.gustavobarbosab.ninemessage.screens.chat.ChatActivity;
 
+import java.util.List;
+
 import io.reactivex.Observable;
 
 /**
@@ -22,5 +24,9 @@ public class ChatModel {
 
     Observable<Message> provideMessage() {
         return chatService.receiveMessage();
+    }
+
+    Message fakeMessage(String text){
+        return new Message(text,"Gustavo","Brother");
     }
 }
