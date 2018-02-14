@@ -11,7 +11,6 @@ import dagger.Component;
 @ChatScope
 @Component(dependencies = {AppComponent.class}, modules = {ChatModule.class})
 public interface ChatComponent {
-
     void inject(ChatActivity chatActivity);
 
 }

@@ -14,8 +14,11 @@ import com.example.gustavobarbosab.ninemessage.R;
 import com.example.gustavobarbosab.ninemessage.domain.Message;
 import com.example.gustavobarbosab.ninemessage.screens.chat.ChatActivity;
 import com.example.gustavobarbosab.ninemessage.screens.chat.recycler.ChatAdapter;
+import com.example.gustavobarbosab.ninemessage.screens.chat.recycler.Items.HolderItem;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,7 +59,7 @@ public class ChatView implements ChatContract.View{
         ButterKnife.bind(this,view);
     }
 
-    public void setmAdapter(List<Message> messages) {
+    public void setmAdapter(List<HolderItem> messages) {
         mAdapter = new ChatAdapter(messages);
         recyclerView.setAdapter(mAdapter);
         LinearLayoutManager mLayout= new LinearLayoutManager(view.getContext());
@@ -71,7 +74,7 @@ public class ChatView implements ChatContract.View{
     public void notifyDataChanged() {
         recyclerView.smoothScrollToPosition(mAdapter.getItemCount()-1);
         mAdapter.notifyDataSetChanged();
-        this.clearText(textView);
+        this.setText("");
     }
 
     public void toastMessage(String message) {
@@ -81,14 +84,22 @@ public class ChatView implements ChatContract.View{
     @OnClick(R.id.sendButton)
     @Override
     public void sendMessage(){
-        activity.getPresenter().getMessage();
-    }
-
-    public void clearText(TextView text){
-        text.setText("");
+        activity.getPresenter().attemptSend();
     }
 
     public String getMessageText() {
         return textView.getText().toString();
+    }
+
+    public ChatActivity getActivity() {
+        return activity;
+    }
+
+    public void requestTextFocus() {
+        textView.requestFocus();
+    }
+
+    public void setText(String text) {
+        textView.setText(text);
     }
 }

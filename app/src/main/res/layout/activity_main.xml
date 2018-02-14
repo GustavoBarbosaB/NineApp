@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screens.chat.ChatActivity"
-    android:background="#e7e0d9">
+    android:background="#E2E6E8"
+    tools:context=".screens.chat.ChatActivity">
 
 
     <android.support.v7.widget.RecyclerView
@@ -22,39 +22,40 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:gravity="center">
+        app:layout_constraintStart_toStartOf="parent">
 
         <EditText
             android:id="@+id/textMessage"
             android:layout_width="wrap_content"
-            android:layout_weight="2"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="2"
+            android:background="@drawable/text_background"
             android:ems="13"
             android:hint="@string/hint_chat"
             android:inputType="textPersonName"
-            android:padding="13dp"
-            android:layout_margin="5dp"
+            android:padding="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/sendButton"
-            android:background="@drawable/text_background"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:elevation="2dp"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/sendButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:elevation="1dp"
-            app:elevation="1dp"
             android:layout_weight="1"
-            android:src="@drawable/ic_send" />
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_send"
+            app:elevation="2dp"
+            app:backgroundTint="@color/colorPrimary"/>
 
     </LinearLayout>
-
-
 
 
 </android.support.constraint.ConstraintLayout>

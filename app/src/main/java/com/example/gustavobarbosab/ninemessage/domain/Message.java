@@ -1,20 +1,15 @@
 package com.example.gustavobarbosab.ninemessage.domain;
 
 
+import com.example.gustavobarbosab.ninemessage.screens.chat.recycler.Items.HolderItem;
+
 /**
  * Created by gustavobarbosab on 26/01/18.
  */
 public class Message {
 
     private String message;
-    private String sender;
-    private String receiver;
-
-    public Message(String message, String sender, String receiver) {
-        this.message = message;
-        this.sender = sender;
-        this.receiver = receiver;
-    }
+    private String username;
 
     public String getMessage() {
         return message;
@@ -24,19 +19,17 @@ public class Message {
         this.message = message;
     }
 
-    public String getSender() {
-        return sender;
+    public String getUsername() {
+        return username;
     }
 
-    public void setSender(String sender) {
-        this.sender = sender;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getReceiver() {
-        return receiver;
-    }
+    public Message(String message, String username) {
 
-    public void setReceiver(String receiver) {
-        this.receiver = receiver;
+        this.message = message;
+        this.username = username;
     }
 }

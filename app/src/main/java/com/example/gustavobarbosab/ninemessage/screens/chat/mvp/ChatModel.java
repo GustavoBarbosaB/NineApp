@@ -3,9 +3,12 @@ package com.example.gustavobarbosab.ninemessage.screens.chat.mvp;
 import com.example.gustavobarbosab.ninemessage.api.ChatService;
 import com.example.gustavobarbosab.ninemessage.domain.Message;
 import com.example.gustavobarbosab.ninemessage.screens.chat.ChatActivity;
+import com.example.gustavobarbosab.ninemessage.screens.chat.recycler.Items.HolderItem;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import io.reactivex.Observable;
 
@@ -24,7 +27,7 @@ public class ChatModel implements ChatContract.Model {
      */
 
     ChatPresenter presenter;
-    List<Message> messages = new ArrayList<>();
+    List<HolderItem> messages = new ArrayList<>();
     ChatService chatService;
 
     public ChatModel(ChatActivity chatActivity, ChatService api) {
@@ -38,6 +41,7 @@ public class ChatModel implements ChatContract.Model {
 
     @Override
     public Message sendMessage(String text){
-        return new Message(text,"Gustavo","Brother");
+       // return new Message(text,"Gustavo","Brother");
+        return null;
     }
 }

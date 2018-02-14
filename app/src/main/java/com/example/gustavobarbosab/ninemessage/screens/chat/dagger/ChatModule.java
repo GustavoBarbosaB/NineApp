@@ -6,9 +6,11 @@ import com.example.gustavobarbosab.ninemessage.screens.chat.mvp.ChatModel;
 import com.example.gustavobarbosab.ninemessage.screens.chat.mvp.ChatPresenter;
 import com.example.gustavobarbosab.ninemessage.screens.chat.mvp.ChatView;
 import com.example.gustavobarbosab.ninemessage.util.rx.RxSchedulers;
+import com.github.nkzawa.socketio.client.Socket;
 
 import org.greenrobot.eventbus.EventBus;
 
+import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
 import io.reactivex.disposables.CompositeDisposable;
@@ -33,9 +35,9 @@ public class ChatModule {
 
     @ChatScope
     @Provides
-    ChatPresenter providePresenter(ChatView chatView, ChatModel chatModel, EventBus eventBus, RxSchedulers rxSchedulers){
+    ChatPresenter providePresenter(ChatView chatView, ChatModel chatModel, EventBus eventBus, RxSchedulers rxSchedulers, Socket socket){
         CompositeDisposable compositeDisposable = new CompositeDisposable();
-        return new ChatPresenter(chatView,chatModel,compositeDisposable,eventBus,rxSchedulers);
+        return new ChatPresenter(chatView,chatModel,compositeDisposable,eventBus,rxSchedulers,socket);
     }
 
     @ChatScope

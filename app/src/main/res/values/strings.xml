@@ -1,4 +1,24 @@
 <resources>
     <string name="app_name">Nine Message</string>
     <string name="hint_chat">Digite uma mensagem</string>
+    <string name="botaoEntrar">Entrar</string>
+    <string name="usernameText">Digite seu nome</string>
+
+    <string name="action_leave">Receber</string>
+    <string name="action_send">Enviar</string>
+    <string name="prompt_message">Mensagem</string>
+
+    <string name="connect">Conectado</string>
+    <string name="disconnect">Disconectado, por favor cheque a conexão com a internet</string>
+    <string name="error_connect">Falha ao conectar</string>
+
+    <!-- messages -->
+    <string name="message_welcome">Bem vindo ao nine message</string>
+    <plurals name="message_participants">
+        <item quantity="one">há %d participantes</item>
+        <item quantity="other">existem %d participantes</item>
+    </plurals>
+    <string name="message_user_joined">%s entrou</string>
+    <string name="message_user_left">%s saiu</string>
+    <string name="user_action_typing">está escrevendo</string>
 </resources>

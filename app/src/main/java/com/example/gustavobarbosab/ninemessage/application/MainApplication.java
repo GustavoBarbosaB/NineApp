@@ -1,20 +1,26 @@
 package com.example.gustavobarbosab.ninemessage.application;
 
+import android.app.Activity;
 import android.app.Application;
 
 import com.example.gustavobarbosab.ninemessage.BuildConfig;
 import com.example.gustavobarbosab.ninemessage.application.builder.AppComponent;
-import com.example.gustavobarbosab.ninemessage.application.builder.AppContextModule;
+import com.example.gustavobarbosab.ninemessage.application.builder.AppModule;
 import com.example.gustavobarbosab.ninemessage.application.builder.DaggerAppComponent;
 
 
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasActivityInjector;
 import timber.log.Timber;
 
 /**
  * Created by gustavobarbosab on 27/01/18.
  */
 
-public class AppController extends Application {
+public class MainApplication extends Application{
 
     private static AppComponent component;
 
@@ -26,7 +32,10 @@ public class AppController extends Application {
     }
 
     private void initAppComponent() {
-        component = DaggerAppComponent.builder().appContextModule(new AppContextModule(this)).build();
+        component = DaggerAppComponent
+                .builder()
+                .appModule(new AppModule(this))
+                .build();
     }
 
 
