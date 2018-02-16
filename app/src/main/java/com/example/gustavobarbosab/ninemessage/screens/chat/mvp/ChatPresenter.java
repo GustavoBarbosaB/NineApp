@@ -83,6 +83,8 @@ public class ChatPresenter implements ChatContract.Presenter{
         initChat();
     }
 
+
+
     private void initChat() {
         mSocket.on(Socket.EVENT_CONNECT,onConnect);
         mSocket.on(Socket.EVENT_DISCONNECT,onDisconnect);
@@ -136,6 +138,7 @@ public class ChatPresenter implements ChatContract.Presenter{
         //model.messages.add(model.sendMessage(view.getMessageText()));
         view.notifyDataChanged();
     }
+
 
     public void getMessage(){
         compositeDisposable.add(model.provideMessage()

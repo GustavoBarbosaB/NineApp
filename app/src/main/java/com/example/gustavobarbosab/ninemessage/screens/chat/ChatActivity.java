@@ -34,6 +34,24 @@ public class ChatActivity extends AppCompatActivity{
 
         setContentView(view.view());
         presenter.onCreate(getIntent().getExtras());
+
+
+    }
+
+
+
+    @Override
+    protected void onSaveInstanceState(Bundle state){
+        super.onSaveInstanceState(state);
+        view.saveInstance(state);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle state){
+        super.onRestoreInstanceState(state);
+        if(state!=null) {
+            view.restoreInstance(state);
+        }
     }
 
     @Override

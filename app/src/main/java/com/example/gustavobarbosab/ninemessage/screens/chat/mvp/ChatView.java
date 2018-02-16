@@ -1,5 +1,6 @@
 package com.example.gustavobarbosab.ninemessage.screens.chat.mvp;
 
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -86,6 +87,18 @@ public class ChatView implements ChatContract.View{
     public void sendMessage(){
         activity.getPresenter().attemptSend();
     }
+
+    @Override
+    public void restoreInstance(Bundle state) {
+        mAdapter = (ChatAdapter) state.getSerializable(ChatContract.adapter);
+        notifyDataChanged();
+    }
+
+    @Override
+    public void saveInstance(Bundle state) {
+        state.putSerializable(ChatContract.adapter,mAdapter);
+    }
+
 
     public String getMessageText() {
         return textView.getText().toString();
