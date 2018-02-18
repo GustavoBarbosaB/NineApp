@@ -4,18 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E2E6E8"
+    android:background="@color/background"
     tools:context=".screens.chat.ChatActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_margin="0dp"
+        android:background="@color/claroAzul"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="0dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -37,13 +50,15 @@
             android:background="@drawable/text_background"
             android:ems="13"
             android:hint="@string/hint_chat"
-            android:inputType="textPersonName"
+            android:textColorHint="@color/fontColor"
+            android:textColor="@color/fontColor"
+            android:inputType="textLongMessage"
             android:padding="12dp"
             android:imeOptions="actionSend"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/sendButton"
             app:layout_constraintStart_toStartOf="parent"
-            android:elevation="2dp"/>
+            android:elevation="1dp"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/sendButton"
@@ -52,9 +67,9 @@
             android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
-            android:src="@drawable/ic_send"
+            app:srcCompat="@drawable/ic_send"
             app:elevation="2dp"
-            app:backgroundTint="@color/colorPrimary"/>
+            app:backgroundTint="@color/claroAzul"/>
 
     </LinearLayout>
 

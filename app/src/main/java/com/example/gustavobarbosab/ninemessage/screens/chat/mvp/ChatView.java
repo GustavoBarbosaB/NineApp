@@ -1,9 +1,11 @@
 package com.example.gustavobarbosab.ninemessage.screens.chat.mvp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,7 @@ import com.example.gustavobarbosab.ninemessage.domain.Message;
 import com.example.gustavobarbosab.ninemessage.screens.chat.ChatActivity;
 import com.example.gustavobarbosab.ninemessage.screens.chat.recycler.ChatAdapter;
 import com.example.gustavobarbosab.ninemessage.screens.chat.recycler.Items.HolderItem;
+import com.example.gustavobarbosab.ninemessage.screens.login.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +43,9 @@ public class ChatView implements ChatContract.View{
      *como no MVC, responde a saída e entrada de dados, porém a saída vem do Presenter,
      *a entrada normalmente vem do usuário;
      */
+
+    @BindView(R.id.my_toolbar)
+    Toolbar toolbar;
 
     @BindView(R.id.sendButton)
     FloatingActionButton sendButton;
@@ -63,7 +69,9 @@ public class ChatView implements ChatContract.View{
         view = LayoutInflater.from(context).inflate(R.layout.activity_main, parent, true);
         ButterKnife.bind(this,view);
         keyboardSendConfig();
-
+        toolbar.setLogo(R.mipmap.ic_toolbar);
+        toolbar.setTitle(R.string.nine);
+        activity.setSupportActionBar(toolbar);
     }
 
     private void keyboardSendConfig() {
@@ -134,5 +142,11 @@ public class ChatView implements ChatContract.View{
 
     public void updateAdapter(ArrayList<HolderItem> messages) {
         mAdapter.setMessages(messages);
+    }
+
+    public void login() {
+        Intent intent = new Intent(activity, LoginActivity.class);
+        activity.startActivity(intent);
+        activity.close();
     }
 }
