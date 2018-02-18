@@ -4,9 +4,12 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +20,7 @@ import com.example.gustavobarbosab.ninemessage.screens.chat.ChatActivity;
 import com.example.gustavobarbosab.ninemessage.screens.chat.recycler.ChatAdapter;
 import com.example.gustavobarbosab.ninemessage.screens.chat.recycler.Items.HolderItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -44,7 +48,7 @@ public class ChatView implements ChatContract.View{
     RecyclerView recyclerView;
 
     @BindView(R.id.textMessage)
-    TextView textView;
+    EditText editText;
 
     View view;
 
@@ -58,9 +62,22 @@ public class ChatView implements ChatContract.View{
         parent.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         view = LayoutInflater.from(context).inflate(R.layout.activity_main, parent, true);
         ButterKnife.bind(this,view);
+        keyboardSendConfig();
+
     }
 
-    public void setmAdapter(List<HolderItem> messages) {
+    private void keyboardSendConfig() {
+        editText.setOnEditorActionListener((v, actionId, event) -> {
+            boolean handled = false;
+            if (actionId == EditorInfo.IME_ACTION_SEND) {
+                sendMessage();
+                handled = true;
+            }
+            return handled;
+        });
+    }
+
+    public void setmAdapter(ArrayList<HolderItem> messages) {
         mAdapter = new ChatAdapter(messages);
         recyclerView.setAdapter(mAdapter);
         LinearLayoutManager mLayout= new LinearLayoutManager(view.getContext());
@@ -90,18 +107,17 @@ public class ChatView implements ChatContract.View{
 
     @Override
     public void restoreInstance(Bundle state) {
-        mAdapter = (ChatAdapter) state.getSerializable(ChatContract.adapter);
-        notifyDataChanged();
+
     }
 
     @Override
     public void saveInstance(Bundle state) {
-        state.putSerializable(ChatContract.adapter,mAdapter);
+
     }
 
 
     public String getMessageText() {
-        return textView.getText().toString();
+        return editText.getText().toString();
     }
 
     public ChatActivity getActivity() {
@@ -109,10 +125,14 @@ public class ChatView implements ChatContract.View{
     }
 
     public void requestTextFocus() {
-        textView.requestFocus();
+        editText.requestFocus();
     }
 
     public void setText(String text) {
-        textView.setText(text);
+        editText.setText(text);
+    }
+
+    public void updateAdapter(ArrayList<HolderItem> messages) {
+        mAdapter.setMessages(messages);
     }
 }

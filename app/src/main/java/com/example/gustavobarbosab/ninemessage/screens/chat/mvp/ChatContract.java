@@ -9,7 +9,9 @@ import com.example.gustavobarbosab.ninemessage.domain.Message;
  */
 
 public interface ChatContract {
-    String adapter = "ADAPTER";
+    String recyclerSave = "RECYCLER_VIEW";
+    String usernameSave = "username";
+    String numUsersSave = "numUsers";
 
     interface View{
         void sendMessage();
@@ -18,11 +20,12 @@ public interface ChatContract {
 
     }
     interface Model{
-
         Message sendMessage(String text);
 
     }
     interface Presenter{
+        void restoreInstance(Bundle state);
+        void saveInstance(Bundle state);
         void sendMessage();
 
     }

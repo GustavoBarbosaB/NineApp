@@ -13,6 +13,7 @@ import com.example.gustavobarbosab.ninemessage.screens.chat.recycler.holder.They
 import com.example.gustavobarbosab.ninemessage.screens.chat.recycler.holder.ViewHolder;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,9 +22,9 @@ import java.util.List;
 
 public class ChatAdapter extends RecyclerView.Adapter<ViewHolder> implements Serializable {
 
-    private List<HolderItem> messages;
+    private ArrayList<HolderItem> messages;
 
-    public ChatAdapter(List<HolderItem> messages) {
+    public ChatAdapter(ArrayList<HolderItem> messages) {
         this.messages = messages;
     }
 
@@ -60,6 +61,11 @@ public class ChatAdapter extends RecyclerView.Adapter<ViewHolder> implements Ser
     public void onBindViewHolder(ViewHolder holder, int position) {
         HolderItem item = messages.get(position);
         holder.bindType(item);
+    }
+
+    public void setMessages(ArrayList<HolderItem> messages){
+        this.messages.clear();
+        this.messages.addAll(messages);
     }
 
     @Override

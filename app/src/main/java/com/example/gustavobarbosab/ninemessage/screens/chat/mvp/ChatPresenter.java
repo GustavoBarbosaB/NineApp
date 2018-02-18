@@ -12,6 +12,7 @@ import com.example.gustavobarbosab.ninemessage.domain.*;
 import com.example.gustavobarbosab.ninemessage.domain.events.ErrorEvent;
 import com.example.gustavobarbosab.ninemessage.domain.events.MessageEvent;
 import com.example.gustavobarbosab.ninemessage.screens.chat.recycler.Items.AlertItem;
+import com.example.gustavobarbosab.ninemessage.screens.chat.recycler.Items.HolderItem;
 import com.example.gustavobarbosab.ninemessage.screens.chat.recycler.Items.MyMessageItem;
 import com.example.gustavobarbosab.ninemessage.screens.chat.recycler.Items.TheyMessageItem;
 import com.example.gustavobarbosab.ninemessage.screens.login.LoginActivity;
@@ -23,6 +24,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,11 +77,7 @@ public class ChatPresenter implements ChatContract.Presenter{
         this.compositeDisposable = compositeDisposable;
         this.rxSchedulers = rxSchedulers;
         this.mSocket=msocket;
-
-        view.setmAdapter(model.messages);
-
         eventBus.register(this);
-
         initChat();
     }
 
@@ -96,15 +94,15 @@ public class ChatPresenter implements ChatContract.Presenter{
         mSocket.on("typing", onTyping);
         mSocket.on("stop typing", onStopTyping);
         mSocket.connect();
-
-       // startSignIn();
     }
 
     public void onCreate(Bundle bundle) {
         Log.d("Chat presenter", "tudo ok");
-        mUsername = (String) bundle.get("username");
-        numUsers = (int) bundle.get("numUsers");
-
+        if(bundle!=null){
+            mUsername = (String) bundle.get(ChatContract.usernameSave);
+            numUsers = (int) bundle.get(ChatContract.numUsersSave);
+            view.setmAdapter(model.messages);
+        }
     }
 
     public void onDestroy(){
@@ -134,9 +132,29 @@ public class ChatPresenter implements ChatContract.Presenter{
 
 
     @Override
+    public void restoreInstance(Bundle bundle) {
+        if(bundle!=null){
+            mUsername = (String) bundle.get(ChatContract.usernameSave);
+            numUsers = (int) bundle.get(ChatContract.numUsersSave);
+            ArrayList<HolderItem> item = (ArrayList<HolderItem>) bundle.get(ChatContract.recyclerSave);
+            if(item!=null) {
+                model.changeMessages(item);
+                view.notifyDataChanged();
+            }
+        }
+    }
+
+    @Override
+    public void saveInstance(Bundle state) {
+        state.putSerializable(ChatContract.usernameSave,mUsername);
+        state.putInt(ChatContract.numUsersSave, numUsers);
+        state.putSerializable(ChatContract.recyclerSave,model.messages);
+    }
+
+    @Override
     public void sendMessage(){
-        //model.messages.add(model.sendMessage(view.getMessageText()));
-        view.notifyDataChanged();
+        /*model.messages.add(model.sendMessage(view.getMessageText()));
+        view.notifyDataChanged();*/
     }
 
 

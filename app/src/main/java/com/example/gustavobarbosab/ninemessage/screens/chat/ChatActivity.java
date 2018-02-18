@@ -38,20 +38,17 @@ public class ChatActivity extends AppCompatActivity{
 
     }
 
-
-
     @Override
     protected void onSaveInstanceState(Bundle state){
+        presenter.saveInstance(state);
         super.onSaveInstanceState(state);
-        view.saveInstance(state);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle state){
         super.onRestoreInstanceState(state);
-        if(state!=null) {
-            view.restoreInstance(state);
-        }
+        presenter.restoreInstance(state);
+
     }
 
     @Override

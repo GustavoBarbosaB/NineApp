@@ -5,6 +5,7 @@ import com.example.gustavobarbosab.ninemessage.domain.Message;
 import com.example.gustavobarbosab.ninemessage.screens.chat.ChatActivity;
 import com.example.gustavobarbosab.ninemessage.screens.chat.recycler.Items.HolderItem;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import io.reactivex.Observable;
  * Created by gustavobarbosab on 05/02/18.
  */
 
-public class ChatModel implements ChatContract.Model {
+public class ChatModel implements ChatContract.Model, Serializable {
 
     /**
      * Model (Modelo): classes de obtenção de dados, em uma base convencional local ou pela
@@ -27,7 +28,7 @@ public class ChatModel implements ChatContract.Model {
      */
 
     ChatPresenter presenter;
-    List<HolderItem> messages = new ArrayList<>();
+    ArrayList<HolderItem> messages = new ArrayList<>();
     ChatService chatService;
 
     public ChatModel(ChatActivity chatActivity, ChatService api) {
@@ -43,5 +44,10 @@ public class ChatModel implements ChatContract.Model {
     public Message sendMessage(String text){
        // return new Message(text,"Gustavo","Brother");
         return null;
+    }
+
+    public void changeMessages(ArrayList<HolderItem> itens) {
+        messages.clear();
+        messages.addAll(itens);
     }
 }
